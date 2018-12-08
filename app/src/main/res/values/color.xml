@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name = "black">#000000</color>
+    <color name = "white">#FFFFFF</color>
+    <color name = "grey">#ACACAC</color>
+    <color name = "red">#f96c6c</color>
+    <color name = "yellow">#facb6c</color>
+    <color name = "green">#d3f96c</color>
+    <color name = "greenStroke">#8fe300</color>
+    <color name = "blueStroke">#207d94</color>
+    <color name = "yellowStorke">#FF8800</color>
+    <color name = "redStroke">#e30202</color>
+    <color name = "redDark">#910202</color>
+    <drawable name = "transparent">#00000000</drawable>
+
+    <color name = "prayerCellTitle">#3ed557</color>
+    <color name = "prayerCellTitleLight">#7ce892</color>
+    
+    <color name = "prayerCell">#efe8df</color>
+    
+    <color name = "background">#f4f0ea</color>
+    <color name = "background_border">#f1dea9</color>
+    <color name = "tab_background">#FFFFFF<!--#f9f0d8  --></color>
+
+
+</resources>

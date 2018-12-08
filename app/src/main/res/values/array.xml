@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string-array name="status_options">
+		    <item>@string/available</item>
+		    <item>@string/carpooling</item>
+		    <item>@string/full</item>
+		</string-array>
+		
+        <string-array name="tab_titles">
+		    <item>@string/prayer</item>
+		    <item>@string/parking</item>
+		</string-array>
+		
+        <string-array name="prayers">
+		    <item>@string/fajr</item>
+		    <item>@string/duhr</item>
+		    <item>@string/asr</item>
+		    <item>@string/magrib</item>
+		    <item>@string/isha</item>
+		</string-array>
+</resources>
