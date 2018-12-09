@@ -7,3 +7,10 @@ android:
     - tools
     - build-tools-28.0.3
     - android-28
+
+addons:
+  sonarcloud:
+    organization: "isnrv"
+
+script:
+  - sonar-scanner
