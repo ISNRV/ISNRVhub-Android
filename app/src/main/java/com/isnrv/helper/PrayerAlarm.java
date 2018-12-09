@@ -108,7 +108,6 @@ public class PrayerAlarm {
 					if (nextDayFajr == null) {
 						// Reached end of file (today is last day of the year).
 						// Read first line in file.
-//							reader = openPrayerFile(assets);
 						try (BufferedReader r2 = openPrayerFile(assets)) {
 							nextDayFajr = r2.readLine();
 						}

@@ -61,7 +61,6 @@ public class ParkingStatus {
 		parkingRef.addValueEventListener(new ValueEventListener() {
 			@Override
 			public void onDataChange(DataSnapshot snap) {
-				//System.out.println(snap.getName() + " -> " + snap.getValue());
 				status = snap.getValue().toString();
 				notifyUser(context);
 				updateStatus();

@@ -72,12 +72,6 @@ public class Splash extends Activity {
 	private void startAnimations() {
 		Animation anim = AnimationUtils.loadAnimation(this, R.anim.slow_fade_in);
 		anim.reset();
-        /*LinearLayout l = (LinearLayout) findViewById(R.id.splash_layout);
-        l.clearAnimation();
-        l.startAnimation(anim);*/
-
-		//anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
-		//anim.reset();
 		ImageView logo = findViewById(R.id.splash_logo);
 		logo.clearAnimation();
 		logo.startAnimation(anim);

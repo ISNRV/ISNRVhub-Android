@@ -68,21 +68,12 @@ public class Main extends FragmentActivity {
 		configRef.addValueEventListener(new ValueEventListener() {
 			@Override
 			public void onDataChange(DataSnapshot snap) {
-				SharedPreferences.Editor editor = PreferenceManager
+				final SharedPreferences.Editor editor = PreferenceManager
 						.getDefaultSharedPreferences(getApplicationContext()).edit();
-				String vibrateConfig = snap.child("vibrate").getValue().toString();
-				String soundConfig = snap.child("sound").getValue().toString();
-				if (soundConfig.contains("on") || soundConfig.contains("true")) {
-					editor.putBoolean("soundConfig", true);
-				} else {
-					editor.putBoolean("soundConfig", false);
-				}
-
-				if (vibrateConfig.contains("on") || vibrateConfig.contains("true")) {
-					editor.putBoolean("vibrateConfig", true);
-				} else {
-					editor.putBoolean("vibrateConfig", false);
-				}
+				final String vibrateConfig = snap.child("vibrate").getValue().toString();
+				final String soundConfig = snap.child("sound").getValue().toString();
+				editor.putBoolean("soundConfig", soundConfig.contains("on") || soundConfig.contains("true"));
+				editor.putBoolean("vibrateConfig", vibrateConfig.contains("on") || vibrateConfig.contains("true"));
 				editor.apply();
 			}
 
