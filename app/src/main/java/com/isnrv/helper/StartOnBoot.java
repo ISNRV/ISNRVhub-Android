@@ -1,17 +1,17 @@
 package com.isnrv.helper;
 
-import com.isnrv.ScheduledService;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.text.TextUtils;
+import com.isnrv.ScheduledService;
 
 public class StartOnBoot extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		Log.d("TAG", "StartOnBoot");
-		Intent serviceIntent = new Intent(context, ScheduledService.class);
-		context.startService(serviceIntent);
+		String action = intent.getAction();
+		if (!TextUtils.isEmpty(action) && Intent.ACTION_BOOT_COMPLETED.equals(action)) {
+			context.startService(new Intent(context, ScheduledService.class));
+		}
 	}
 }

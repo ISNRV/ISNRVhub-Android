@@ -13,25 +13,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.isnrv.helper.MainAdapter;
 import com.viewpagerindicator.TabPageIndicator;
+
 /**
  * This class contains a ViewPager that shows either prayer.xml or status.xml in two separate tabs
- * @author Yasir
- *
  */
 public class Main extends FragmentActivity {
-	private final static String TAG = "Main";
+	private static final String TAG = "Main";
 
 	private Firebase configRef;
 	private Firebase announcementRef;
 	private TextView announcementTextView;
-	private MainAdapter mAdapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,30 +38,32 @@ public class Main extends FragmentActivity {
 		announcementRef = new Firebase(
 				"https://isnrvhub.firebaseio.com/announcement");
 		configRef = new Firebase("https://isnrvhub.firebaseio.com/config");
-		announcementTextView = (TextView) findViewById(R.id.announcementTextView);
+		announcementTextView = findViewById(R.id.announcementTextView);
 
 		// setup actionbar
 		final ActionBar actionBar = getActionBar();
-		actionBar.setCustomView(R.layout.custom_actionbar);
-		actionBar.setDisplayShowTitleEnabled(false);
-		actionBar.setDisplayShowCustomEnabled(true);
-		actionBar.setDisplayUseLogoEnabled(false);
-		actionBar.setDisplayShowHomeEnabled(false);
+		if (actionBar != null) {
+			actionBar.setCustomView(R.layout.custom_actionbar);
+			actionBar.setDisplayShowTitleEnabled(false);
+			actionBar.setDisplayShowCustomEnabled(true);
+			actionBar.setDisplayUseLogoEnabled(false);
+			actionBar.setDisplayShowHomeEnabled(false);
+		}
 
 		// Set ViewPager adapter
 		Log.i(TAG, "mAdapter");
-		mAdapter = new MainAdapter(getSupportFragmentManager(),
+		MainAdapter mAdapter = new MainAdapter(getSupportFragmentManager(),
 				getApplicationContext());
-		ViewPager mPager = (ViewPager) findViewById(R.id.pager);
+		ViewPager mPager = findViewById(R.id.pager);
 		mPager.setAdapter(mAdapter);
 		// Set ViewPager indicator
-		TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
+		TabPageIndicator indicator = findViewById(R.id.indicator);
 		indicator.setViewPager(mPager);
 
 		setCallbacks();
 	}
 
-	public void setCallbacks() {
+	private void setCallbacks() {
 		// callback to check announcement
 		configRef.addValueEventListener(new ValueEventListener() {
 			@Override
@@ -73,22 +72,23 @@ public class Main extends FragmentActivity {
 						.getDefaultSharedPreferences(getApplicationContext()).edit();
 				String vibrateConfig = snap.child("vibrate").getValue().toString();
 				String soundConfig = snap.child("sound").getValue().toString();
-				if(soundConfig.contains("on") || soundConfig.contains("true")){
+				if (soundConfig.contains("on") || soundConfig.contains("true")) {
 					editor.putBoolean("soundConfig", true);
-				}else{
+				} else {
 					editor.putBoolean("soundConfig", false);
 				}
-				
-				if(vibrateConfig.contains("on") || vibrateConfig.contains("true")){
+
+				if (vibrateConfig.contains("on") || vibrateConfig.contains("true")) {
 					editor.putBoolean("vibrateConfig", true);
-				}else{
+				} else {
 					editor.putBoolean("vibrateConfig", false);
 				}
-				editor.commit();
+				editor.apply();
 			}
 
 			@Override
 			public void onCancelled(FirebaseError error) {
+				// do nothing
 			}
 		});
 
@@ -107,6 +107,7 @@ public class Main extends FragmentActivity {
 
 			@Override
 			public void onCancelled(FirebaseError error) {
+				// do nothing
 			}
 		});
 	}
@@ -121,26 +122,10 @@ public class Main extends FragmentActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.menu_admin:
+		if (item.getItemId() == R.id.menu_admin) {
 			startActivity(new Intent(getApplicationContext(), Admin.class));
-			break;
 		}
 		return true;
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		Log.d(TAG, "onResume()");
-		mAdapter.onResume();
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		Log.d(TAG, "onPause()");
-		mAdapter.onPause();
 	}
 
 	@Override
@@ -150,6 +135,6 @@ public class Main extends FragmentActivity {
 		SharedPreferences.Editor editor = PreferenceManager
 				.getDefaultSharedPreferences(getApplicationContext()).edit();
 		editor.putBoolean("loggedIn", false);
-		editor.commit();
+		editor.apply();
 	}
 }
