@@ -12,8 +12,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class PrayerAlarm {
-	private static final String TAG = PrayerAlarm.class.getCanonicalName();
+public class PrayerTimes {
+	private static final String TAG = PrayerTimes.class.getCanonicalName();
 
 	// Returns an array consists athan and iqama of every prayer of current day with next day Fajr.
 	private String[] getTodayPrayersArrayWithFajr(AssetManager assets) {
@@ -32,7 +32,7 @@ public class PrayerAlarm {
 
 	// Find which prayer is next by comparing athan time with current time.
 	// Return time of next prayer
-	public NextPrayer findNextAthan(AssetManager assets) {
+	NextPrayer findNextAthan(AssetManager assets) {
 		String[] prayerTimes = getTodayPrayersArrayWithFajr(assets);
 		// Set data format
 		SimpleDateFormat format = new SimpleDateFormat("M/d/y, hh:mm aa", Locale.US);
@@ -126,7 +126,7 @@ public class PrayerAlarm {
 		return new BufferedReader(new InputStreamReader(assets.open("prayerTimes.txt")));
 	}
 
-	public class NextPrayer {
+	class NextPrayer {
 		private final Calendar athanCal;
 		private final int index;
 
@@ -135,11 +135,11 @@ public class PrayerAlarm {
 			this.index = index;
 		}
 
-		public Calendar getAthanCal() {
+		Calendar getAthanCal() {
 			return athanCal;
 		}
 
-		public int getIndex() {
+		int getIndex() {
 			return index;
 		}
 	}

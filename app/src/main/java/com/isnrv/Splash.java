@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import com.isnrv.helper.NotificationService;
 
 /**
  * This class shows a loading animation at the start of the application
@@ -16,7 +16,6 @@ import android.widget.ImageView;
  * @author Yasir
  */
 public class Splash extends Activity {
-	private static final String TAG = Splash.class.getCanonicalName();
 	private static final int SPLASH_TIME = 2000;
 	private boolean active = true;
 	private boolean isRunning = true;
@@ -41,7 +40,6 @@ public class Splash extends Activity {
 				} catch (InterruptedException e) {
 					// do nothing
 					Thread.currentThread().interrupt();
-
 				} finally {
 					finish();
 					if (isRunning)
@@ -51,10 +49,9 @@ public class Splash extends Activity {
 		};
 		splashTread.start();
 
-		Intent intent = new Intent(getApplicationContext(), ScheduledService.class);
+		// Start Notification Service for prayers
+		Intent intent = new Intent(getApplicationContext(), NotificationService.class);
 		if (PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_NO_CREATE) == null) {
-			//start ScheduledService for prayers
-			Log.d(TAG, "Start ScheduledService");
 			startService(intent);
 		}
 

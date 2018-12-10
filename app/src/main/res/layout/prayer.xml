@@ -9,118 +9,99 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:background="@drawable/background">
-
     <TableLayout
-        android:id="@+id/prayerTable"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:padding="20dp" >
-
+            android:id="@+id/prayerTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="20dp">
         <TableRow
-            android:id="@+id/tableRowTitle"
-            style="@style/PrayerRow" >
-
+                android:id="@+id/tableRowTitle"
+                style="@style/PrayerRow">
             <TextView
-                android:id="@+id/textViewPrayer"
-                style="@style/PrayerTextView"
-				android:background="@drawable/transparent" />
+                    android:id="@+id/textViewPrayer"
+                    style="@style/PrayerTextView"
+                    android:background="@drawable/transparent"/>
             <TextView
-                android:id="@+id/textViewAthan"
-                style="@style/PrayerTextViewTitle"
-                android:text="@string/athan" />
+                    android:id="@+id/textViewAthan"
+                    style="@style/PrayerTextViewTitle"
+                    android:text="@string/athan"/>
             <TextView
-                android:id="@+id/textViewIqama"
-                style="@style/PrayerTextViewTitle"
-                android:text="@string/iqama" />
+                    android:id="@+id/textViewIqama"
+                    style="@style/PrayerTextViewTitle"
+                    android:text="@string/iqama"/>
 
         </TableRow>
-        
         <TableRow
-            android:id="@+id/tableRowFajr"
-            style="@style/PrayerRow" >
-            
+                android:id="@+id/tableRowFajr"
+                style="@style/PrayerRow">
             <TextView
-                android:id="@+id/textViewFajr"
-                style="@style/PrayerTextViewTitle"
-                android:text="@string/fajr" />
+                    android:id="@+id/textViewFajr"
+                    style="@style/PrayerTextViewTitle"
+                    android:text="@string/fajr"/>
             <TextView
-                android:id="@+id/textViewFajrA"
-                style="@style/PrayerTextView"/>
+                    android:id="@+id/textViewFajrA"
+                    style="@style/PrayerTextView"/>
             <TextView
-                android:id="@+id/textViewFajrI"
-                style="@style/PrayerTextView"/>
-            
+                    android:id="@+id/textViewFajrI"
+                    style="@style/PrayerTextView"/>
         </TableRow>
-        
         <TableRow
-            android:id="@+id/tableRowDuhr"
-            style="@style/PrayerRow" >
-            
-			<TextView
-                android:id="@+id/textViewDuhr"
-                style="@style/PrayerTextViewTitle"
-                android:text="@string/duhr" />
+                android:id="@+id/tableRowDuhr"
+                style="@style/PrayerRow">
             <TextView
-                android:id="@+id/textViewDuhrA"
-                style="@style/PrayerTextView"/>
+                    android:id="@+id/textViewDuhr"
+                    style="@style/PrayerTextViewTitle"
+                    android:text="@string/duhr"/>
             <TextView
-                android:id="@+id/textViewDuhrI"
-                style="@style/PrayerTextView"/>
-         
+                    android:id="@+id/textViewDuhrA"
+                    style="@style/PrayerTextView"/>
+            <TextView
+                    android:id="@+id/textViewDuhrI"
+                    style="@style/PrayerTextView"/>
         </TableRow>
-        
         <TableRow
-            android:id="@+id/tableRowAsr"
-            style="@style/PrayerRow" >
-            
+                android:id="@+id/tableRowAsr"
+                style="@style/PrayerRow">
             <TextView
-                android:id="@+id/textViewAsr"
-                style="@style/PrayerTextViewTitle"
-                android:text="@string/asr" />
+                    android:id="@+id/textViewAsr"
+                    style="@style/PrayerTextViewTitle"
+                    android:text="@string/asr"/>
             <TextView
-                android:id="@+id/textViewAsrA"
-                style="@style/PrayerTextView"/>
+                    android:id="@+id/textViewAsrA"
+                    style="@style/PrayerTextView"/>
             <TextView
-                android:id="@+id/textViewAsrI"
-                style="@style/PrayerTextView"/>
+                    android:id="@+id/textViewAsrI"
+                    style="@style/PrayerTextView"/>
         </TableRow>
-        
         <TableRow
-            android:id="@+id/tableRowMagrib"
-            style="@style/PrayerRow" >
-            
+                android:id="@+id/tableRowMagrib"
+                style="@style/PrayerRow">
             <TextView
-                android:id="@+id/textViewMagrib"
-                style="@style/PrayerTextViewTitle"
-                android:text="@string/magrib" />
+                    android:id="@+id/textViewMagrib"
+                    style="@style/PrayerTextViewTitle"
+                    android:text="@string/magrib"/>
             <TextView
-                android:id="@+id/textViewMagribA"
-                style="@style/PrayerTextView"/>
+                    android:id="@+id/textViewMagribA"
+                    style="@style/PrayerTextView"/>
             <TextView
-                android:id="@+id/textViewMagribI"
-                style="@style/PrayerTextView"/>
-            
+                    android:id="@+id/textViewMagribI"
+                    style="@style/PrayerTextView"/>
         </TableRow>
-        
         <TableRow
-            android:id="@+id/tableRowIsha"
-            style="@style/PrayerRow" >
-            
+                android:id="@+id/tableRowIsha"
+                style="@style/PrayerRow">
+
             <TextView
-                android:id="@+id/textViewIsha"
-                style="@style/PrayerTextViewTitle"
-                android:text="@string/isha" />
+                    android:id="@+id/textViewIsha"
+                    style="@style/PrayerTextViewTitle"
+                    android:text="@string/isha"/>
             <TextView
-                android:id="@+id/textViewIshaA"
-                style="@style/PrayerTextView"/>
+                    android:id="@+id/textViewIshaA"
+                    style="@style/PrayerTextView"/>
             <TextView
-                android:id="@+id/textViewIshaI"
-                style="@style/PrayerTextView"/>
-            
+                    android:id="@+id/textViewIshaI"
+                    style="@style/PrayerTextView"/>
         </TableRow>
-    
     </TableLayout>
-
-
 </RelativeLayout>

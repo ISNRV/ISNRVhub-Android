@@ -1,30 +1,28 @@
-package com.isnrv;
+package com.isnrv.helper;
 
 
-import android.app.AlarmManager;
-import android.app.IntentService;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
+import android.app.*;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import com.isnrv.helper.PrayerAlarm;
-import com.isnrv.helper.PrayerAlarm.NextPrayer;
+import com.isnrv.R;
+import com.isnrv.helper.PrayerTimes.NextPrayer;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-
-public class ScheduledService extends IntentService {
-	private static final String TAG = ScheduledService.class.getCanonicalName();
+/**
+ * Service to show notifications at prayer times
+ */
+public class NotificationService extends IntentService {
+	private static final String TAG = NotificationService.class.getCanonicalName();
 	private static final String KEY = "nextNotification";
 
-	public ScheduledService() {
+	public NotificationService() {
 		super("My service");
 	}
 
@@ -45,7 +43,7 @@ public class ScheduledService extends IntentService {
 		}
 
 		// Get next prayer
-		NextPrayer nextPrayer = new PrayerAlarm().findNextAthan(getAssets());
+		NextPrayer nextPrayer = new PrayerTimes().findNextAthan(getAssets());
 		Calendar nextPrayerCal = nextPrayer.getAthanCal();
 
 		// Store next prayer data to show next time
@@ -65,7 +63,7 @@ public class ScheduledService extends IntentService {
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
 
 		// Set notification fields
-		NotificationCompat.Builder notification = new NotificationCompat.Builder(this)
+		Notification.Builder notification = new Notification.Builder(this)
 				.setContentTitle(title)
 				.setContentText(text)
 				.setSmallIcon(android.R.drawable.arrow_down_float)
@@ -79,9 +77,9 @@ public class ScheduledService extends IntentService {
 
 	// Set a new alarm for next notification
 	private void setNewAlarm(Calendar notificationTime) {
-		//start ScheduledService for next prayer
+		//start NotificationService for next prayer
 		AlarmManager mgr = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-		Intent intent = new Intent(getApplicationContext(), ScheduledService.class);
+		Intent intent = new Intent(getApplicationContext(), NotificationService.class);
 		PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, 0);
 
 		mgr.set(AlarmManager.RTC_WAKEUP, notificationTime.getTimeInMillis(), pendingIntent);

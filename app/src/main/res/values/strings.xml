@@ -1,38 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">ISNRVhub</string>
-
     <string name="notification_number">NOTIFICATION</string>
-
     <!--  Prayer -->
     <string name="fajr">Fajr</string>
     <string name="duhr">Duhr</string>
     <string name="asr">Asr</string>
     <string name="magrib">Magrib</string>
     <string name="isha">Isha</string>
-    <string name="prayer">Prayer</string>
     <string name="athan">Athan</string>
     <string name="iqama">Iqama</string>
     <string name="prayer_noti_title">Time for $name prayer</string>
     <string name="prayer_noti_text">Iqama at </string>
-    <!--  Status -->
-    <string name="connecting">Connecting&#8230;</string>
-    <string name="available">Available</string>
-    <string name="carpooling">ISNRV Carpooling</string>
-    <string name="full">Full</string>
-    <!--  Connection -->
-    <string name="connected">Connected</string>
-    <string name="disconnected">Disconnected</string>
-    <!--  Admin Login -->
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="login">Login</string>
-    <string name="incorrect_login">The email or password you entered is incorrect.</string>
-    <!--  Pages -->
-    <string name="admin">Admin</string>
-    <string name="parking">Parking</string>
+    <!--  Accessibility -->
     <string name="logo_content_description">ISNRV hub</string>
-    <string name="status">Status:</string>
-
 </resources>
