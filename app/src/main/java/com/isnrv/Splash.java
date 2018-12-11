@@ -1,6 +1,5 @@
 package com.isnrv;
 
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import androidx.appcompat.app.AppCompatActivity;
 import com.isnrv.helper.NotificationService;
 
 /**
@@ -15,7 +15,7 @@ import com.isnrv.helper.NotificationService;
  *
  * @author Yasir
  */
-public class Splash extends Activity {
+public class Splash extends AppCompatActivity {
 	private static final int SPLASH_TIME = 2000;
 	private boolean active = true;
 	private boolean isRunning = true;

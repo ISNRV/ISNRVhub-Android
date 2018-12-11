@@ -16,6 +16,7 @@ import java.util.Objects;
 /**
  * Fragment that shows prayer times in a table highlighting next prayer
  */
+@SuppressWarnings("WeakerAccess")
 public class PrayerTable extends Fragment {
 	private static final int NUM_OF_FIELDS = 10;
 

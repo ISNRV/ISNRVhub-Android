@@ -2,7 +2,6 @@
 <resources>
     <color name = "black">#000000</color>
     <color name = "white">#FFFFFF</color>
-    <color name = "redDark">#910202</color>
     <color name = "prayerCellTitle">#3ed557</color>
     <color name = "prayerCellTitleLight">#7ce892</color>
     <color name = "prayerCell">#efe8df</color>

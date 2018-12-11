@@ -22,7 +22,7 @@
                 android:name="com.isnrv.Splash"
                 android:label="@string/app_name"
                 android:screenOrientation="portrait"
-                android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+                android:theme="@style/Theme.NoTitleBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

@@ -4,13 +4,6 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               android:windowSoftInputMode="stateHidden">
-    <TextView
-            android:id="@+id/announcementTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:visibility="gone"
-            android:textColor="@color/redDark"/>
     <LinearLayout
             android:id="@+id/prayers"
             android:layout_width="match_parent"

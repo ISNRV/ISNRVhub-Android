@@ -1,13 +1,13 @@
 package com.isnrv;
 
-import android.app.ActionBar;
 import android.os.Bundle;
-import androidx.fragment.app.FragmentActivity;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Main Activity
  */
-public class Main extends FragmentActivity {
+public class Main extends AppCompatActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -15,7 +15,7 @@ public class Main extends FragmentActivity {
 		setContentView(R.layout.main);
 
 		// Show custom action bar
-		final ActionBar actionBar = getActionBar();
+		final ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
 			actionBar.setCustomView(R.layout.custom_actionbar);
 			actionBar.setDisplayShowTitleEnabled(false);
