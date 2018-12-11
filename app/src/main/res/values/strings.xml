@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">ISNRVhub</string>
     <string name="notification_number">NOTIFICATION</string>
+    <string name="connection_error">Unable to connect. Please check your internet connection.</string>
     <!--  Prayer -->
     <string name="fajr">Fajr</string>
     <string name="duhr">Duhr</string>
