@@ -125,18 +125,12 @@ public class PrayerTable extends Fragment {
 
 			if (results.isEmpty())
 			{
+				//TODO: load prayer times from local file or from previous results
 				prayerTable.showErrorMessage();
-				//paramString = PreferenceManager.getDefaultSharedPreferences(context).getString("prayer", "");
-			}
-
-			String[] resultsArray = results.split(",");
-			if (resultsArray.length == 11) {
+			}else{
+				String[] resultsArray = results.split(",");
 				prayerTable.populateTable(view, resultsArray);
 			}
-
-			/*SharedPreferences.Editor localEditor = PreferenceManager.getDefaultSharedPreferences(context).edit();
-			localEditor.putString("prayer", paramString);
-			localEditor.commit();*/
 
 		}
 
@@ -154,6 +148,7 @@ public class PrayerTable extends Fragment {
 					R.id.textViewMagribA, R.id.textViewMagribI,
 					R.id.textViewIshaA, R.id.textViewIshaI};
 
+			//TODO add a view for Juma'a prayer and then change (NUM_OF_FIELDS - 1) to (NUM_OF_FIELDS)
 			//populate
 			for (int i = 0; i < NUM_OF_FIELDS - 1; i++) {
 				((TextView) view.findViewById(prayerTableCells[i])).setText(prayers[i]);
