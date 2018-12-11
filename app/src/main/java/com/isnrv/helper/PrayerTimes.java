@@ -7,37 +7,30 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class PrayerTimes {
+/**
+ * Utility class to read prayer times
+ */
+class PrayerTimes {
 	private static final String TAG = PrayerTimes.class.getCanonicalName();
 
-	// Returns an array consists athan and iqama of every prayer of current day with next day Fajr.
-	private String[] getTodayPrayersArrayWithFajr(AssetManager assets) {
-		// Get a string of today prayers
-		final String prayers = getTodayPrayers(assets);
-		return prayers != null ? prayers.split(",") : new String[]{};
+	private PrayerTimes() {
 	}
 
-	// Returns an array consists athan and iqama of every prayer of current day.
-	public String[] getTodayPrayersArray(AssetManager assets) {
-		String[] tempList = getTodayPrayersArrayWithFajr(assets);
-		// Copy the prayer list while ignoring first two elements (month and day)
-		// and last element in the array (next day fajr)
-		return Arrays.copyOfRange(tempList, 2, tempList.length - 2);
-	}
-
-	// Find which prayer is next by comparing athan time with current time.
-	// Return time of next prayer
-	NextPrayer findNextAthan(AssetManager assets) {
-		String[] prayerTimes = getTodayPrayersArrayWithFajr(assets);
+	/**
+	 * Find which prayer is next by comparing Athan time with current time.
+	 *
+	 * @return time of next prayer
+	 */
+	static NextPrayer findNextAthan(AssetManager assets) {
+		final String[] prayerTimes = getTodayPrayersArrayWithFajr(assets);
 		// Set data format
-		SimpleDateFormat format = new SimpleDateFormat("M/d/y, hh:mm aa", Locale.US);
+		final SimpleDateFormat format = new SimpleDateFormat("M/d/y, hh:mm aa", Locale.US);
 		Date prayerDate;
-		Calendar cal = Calendar.getInstance();
+		final Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
 		int month = Integer.parseInt(prayerTimes[0]);
 		int day = Integer.parseInt(prayerTimes[1]);
@@ -64,32 +57,21 @@ public class PrayerTimes {
 		return null;
 	}
 
-	// Find which prayer is next by comparing iqama time with current time.
-	// Return prayer index of the next prayer
-	public int findNextPrayer(String[] prayerTimes) {
-		// Set data format
-		SimpleDateFormat format = new SimpleDateFormat("hh:mm aa", Locale.US);
-		Date prayerDate;
-		try {
-			// Get current time
-			Calendar cal = Calendar.getInstance();
-			Date currentTime = format.parse(format.format(cal.getTime()));
-			// Get index of next prayer (comparison is based on iqama times)
-			for (int i = 1; i < prayerTimes.length; i = i + 2) {
-				prayerDate = format.parse(prayerTimes[i]);
-				if (currentTime.before(prayerDate)) {
-					Log.d(TAG, prayerTimes[i]);
-					return (i - 1);
-				}
-			}
-		} catch (Exception e) {
-			Log.e(TAG, e.getMessage());
-		}
-		return -1;
+	/**
+	 * Get today prayer times and tomorrow Fajr time
+	 *
+	 * @return an array of Athan and Iqama times of today's prayers and next day Fajr
+	 */
+	private static String[] getTodayPrayersArrayWithFajr(AssetManager assetManager) {
+		// Get a string of today prayers
+		final String prayers = getTodayPrayers(assetManager);
+		return prayers != null ? prayers.split(",") : new String[]{};
 	}
 
-	// Returns a string of today prayers and next day Fajr prayer. String also contains current day and month
-	private String getTodayPrayers(AssetManager assets) {
+	/**
+	 * @return string of today prayers and next day Fajr prayer. String also contains current day and month
+	 */
+	private static String getTodayPrayers(AssetManager assets) {
 		// Get current day and month
 		Calendar cal = Calendar.getInstance();
 		int day = cal.get(Calendar.DAY_OF_MONTH);
@@ -122,11 +104,14 @@ public class PrayerTimes {
 		return null;
 	}
 
-	private BufferedReader openPrayerFile(AssetManager assets) throws IOException {
+	private static BufferedReader openPrayerFile(AssetManager assets) throws IOException {
 		return new BufferedReader(new InputStreamReader(assets.open("prayerTimes.txt")));
 	}
 
-	class NextPrayer {
+	/**
+	 * Info of next prayer
+	 */
+	static class NextPrayer {
 		private final Calendar athanCal;
 		private final int index;
 

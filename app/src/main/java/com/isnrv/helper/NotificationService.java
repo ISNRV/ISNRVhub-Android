@@ -4,9 +4,7 @@ package com.isnrv.helper;
 import android.app.*;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import com.isnrv.R;
 import com.isnrv.helper.PrayerTimes.NextPrayer;
 
@@ -19,7 +17,6 @@ import java.util.Locale;
  * Service to show notifications at prayer times
  */
 public class NotificationService extends IntentService {
-	private static final String TAG = NotificationService.class.getCanonicalName();
 	private static final String KEY = "nextNotification";
 
 	public NotificationService() {
@@ -28,9 +25,8 @@ public class NotificationService extends IntentService {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		Log.d(TAG, "onHandleIntent()");
 		// Check if it is time to show prayer notification
-		Calendar currentCal = Calendar.getInstance();
+		final Calendar currentCal = Calendar.getInstance();
 		String nextNotification = PreferenceManager.getDefaultSharedPreferences(this).getString(KEY, "");
 		if (nextNotification != null && !nextNotification.isEmpty()) {
 			final String[] contents = nextNotification.split(",");
@@ -43,23 +39,26 @@ public class NotificationService extends IntentService {
 		}
 
 		// Get next prayer
-		NextPrayer nextPrayer = new PrayerTimes().findNextAthan(getAssets());
-		Calendar nextPrayerCal = nextPrayer.getAthanCal();
+		final NextPrayer nextPrayer = PrayerTimes.findNextAthan(getAssets());
+		if (nextPrayer != null) {
+			final Calendar nextPrayerCal = nextPrayer.getAthanCal();
 
-		// Store next prayer data to show next time
-		nextNotification = formatNextNotification(nextPrayerCal, nextPrayer.getIndex());
-		SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-		editor.putString(KEY, nextNotification);
-		editor.apply();
+			// Store next prayer data to show next time
+			nextNotification = formatNextNotification(nextPrayerCal, nextPrayer.getIndex());
+			PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString(KEY, nextNotification).apply();
 
-		// Set new alarm
-		setNewAlarm(nextPrayerCal);
-
+			// Set new alarm
+			setNewAlarm(nextPrayerCal);
+		}
 	}
 
-	// Show a notification of the prayer
+	/**
+	 * Show a notification of the prayer
+	 *
+	 * @param title notification title
+	 * @param text  notification text
+	 */
 	private void showNotification(String title, String text) {
-		Log.d(TAG, "showNotification()");
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
 
 		// Set notification fields
@@ -75,7 +74,9 @@ public class NotificationService extends IntentService {
 		notificationManager.notify(notificationNumber, notification.build());
 	}
 
-	// Set a new alarm for next notification
+	/**
+	 * Set a new alarm for next notification
+	 */
 	private void setNewAlarm(Calendar notificationTime) {
 		//start NotificationService for next prayer
 		AlarmManager mgr = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
@@ -85,10 +86,12 @@ public class NotificationService extends IntentService {
 		mgr.set(AlarmManager.RTC_WAKEUP, notificationTime.getTimeInMillis(), pendingIntent);
 	}
 
-	// Format data for the next notification (separated by comma):
-	// - Expected notification start time
-	// - Notification title
-	// - Notification text
+	/**
+	 * Format data for the next notification (separated by comma):
+	 * - Expected notification start time
+	 * - Notification title
+	 * - Notification text
+	 */
 	private String formatNextNotification(Calendar nextPrayerCal, int index) {
 		String[] prayersTitle = getResources().getStringArray(R.array.prayers);
 		String title = getResources().getString(R.string.prayer_noti_title);
@@ -99,12 +102,16 @@ public class NotificationService extends IntentService {
 		return calendarToString(nextPrayerCal) + "," + title + "," + text;
 	}
 
-	// Convert a calendar to string format
+	/**
+	 * Convert a calendar to string format
+	 */
 	private String calendarToString(Calendar cal) {
 		return cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND);
 	}
 
-	// Compare two strings of calendar using the format (hh:mm:ss), 2 minutes or less is assumed to be equal
+	/**
+	 * Compare two strings of calendar using the format (hh:mm:ss), 2 minutes or less is assumed to be equal
+	 */
 	private boolean isEqual(String time1, String time2) {
 		SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss", Locale.US);
 		try {
@@ -120,10 +127,5 @@ public class NotificationService extends IntentService {
 			// do nothing
 		}
 		return false;
-	}
-
-	@Override
-	public void onDestroy() {
-		Log.d(TAG, "Stopped");
 	}
 }
