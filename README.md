@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/ISNRV/ISNRVhub.svg?branch=master)](https://travis-ci.org/ISNRV/ISNRVhub)
-[![Code Quality](https://sonarcloud.io/api/project_badges/measure?project=ISNRVhub&metric=alert_status)](https://sonarcloud.io/dashboard?id=ISNRVhub)
-[![GitHub issues](https://img.shields.io/github/issues/ISNRV/ISNRVhub.svg)](https://github.com/ISNRV/ISNRVhub/issues)
-[![GitHub (pre-)release](https://img.shields.io/github/release/ISNRV/ISNRVhub/all.svg)](https://github.com/ISNRV/ISNRVhub/releases)
+[![Build Status](https://travis-ci.org/ISNRV/ISNRVhub-Android.svg?branch=master)](https://travis-ci.org/ISNRV/ISNRVhub-Android)
+[![Code Quality](https://sonarcloud.io/api/project_badges/measure?project=ISNRVhub-Android&metric=alert_status)](https://sonarcloud.io/dashboard?id=ISNRVhub-Android)
+[![GitHub issues](https://img.shields.io/github/issues/ISNRV/ISNRVhub-Android.svg)](https://github.com/ISNRV/ISNRVhub-Android/issues)
+[![GitHub (pre-)release](https://img.shields.io/github/release/ISNRV/ISNRVhub-Android/all.svg)](https://github.com/ISNRV/ISNRVhub-Android/releases)
 [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](LICENSE)
 
 ## ISNRVhub - Android App
