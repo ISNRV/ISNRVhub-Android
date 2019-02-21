@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ISNRVhub</string>
+    <string name="app_name">ISNRV</string>
     <string name="notification_number">NOTIFICATION</string>
-    <string name="connection_error">Unable to connect. Please check your internet connection.</string>
     <!--  Prayer -->
     <string name="fajr">Fajr</string>
     <string name="duhr">Duhr</string>
@@ -12,7 +11,13 @@
     <string name="athan">Athan</string>
     <string name="iqama">Iqama</string>
     <string name="prayer_noti_title">Time for $name prayer</string>
-    <string name="prayer_noti_text">Iqama at </string>
+    <string name="prayer_noti_text">Iqama at $time</string>
     <!--  Accessibility -->
     <string name="logo_content_description">ISNRV hub</string>
+    <string name="prayerTimes">Prayer Times</string>
+    <string name="isnrv_prayerTimes">ISNRV Prayer Times</string>
+    <string name="Friday">Jumaa</string>
+    <string name="extraFriday">Extra Jumaa prayer at $time</string>
+    <string name="date_format">EEE, MMM d</string>
+    <string name="calendar">Calendar</string>
 </resources>

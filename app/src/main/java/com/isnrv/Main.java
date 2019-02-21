@@ -1,30 +1,79 @@
 package com.isnrv;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
-import androidx.appcompat.app.ActionBar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.DatePicker;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 
 /**
  * Main Activity
  */
-public class Main extends AppCompatActivity {
+public class Main extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+
+	private static final int MAX_DAYS = 366;
+	private final DateTime now = DateTime.now();
+	private ViewPager pager;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		// Show custom action bar
-		final ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null) {
-			actionBar.setCustomView(R.layout.custom_actionbar);
-			actionBar.setDisplayShowTitleEnabled(false);
-			actionBar.setDisplayShowCustomEnabled(true);
-			actionBar.setDisplayUseLogoEnabled(false);
-			actionBar.setDisplayShowHomeEnabled(false);
+		pager = findViewById(R.id.pager);
+		pager.setAdapter(new Adapter(getSupportFragmentManager()));
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.calendar) {
+			final DateTime current = now.plusDays(pager.getCurrentItem());
+			final DatePickerDialog dialog = new DatePickerDialog(this, this, current.getYear(), current.getMonthOfYear() - 1, current.getDayOfMonth());
+			dialog.getDatePicker().setMinDate(now.getMillis());
+			dialog.getDatePicker().setMaxDate(now.plusDays(MAX_DAYS).getMillis());
+			dialog.show();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onDateSet(DatePicker view, int year, int month, int day) {
+		final DateTime selectedDate = DateTime.now().withDate(year, month + 1, day);
+		pager.setCurrentItem(Days.daysBetween(now, selectedDate).getDays(), true);
+	}
+
+	private class Adapter extends FragmentPagerAdapter {
+		Adapter(FragmentManager manager) {
+			super(manager);
 		}
 
-		// Show prayer times
-		getSupportFragmentManager().beginTransaction().add(R.id.prayers, new PrayerTable()).commit();
+		@Override
+		public Fragment getItem(int position) {
+			return PrayerList.newInstance(position);
+		}
+
+		@Override
+		public int getCount() {
+			return MAX_DAYS;
+		}
+
+		@Override
+		public CharSequence getPageTitle(int position) {
+			return DateTime.now().plusDays(position).toString(getString(R.string.date_format));
+		}
 	}
 }

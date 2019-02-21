@@ -1,0 +1,109 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/widget"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/widget_title"
+            android:padding="@dimen/widget_margin">
+        <TextView
+                style="@style/WidgetText"
+                android:gravity="start"
+                android:text="@string/isnrv_prayerTimes"
+                android:textColor="@color/logoWhite"/>
+
+        <TextView
+                android:id="@+id/date"
+                style="@style/WidgetText"
+                android:gravity="top|end"
+                android:textColor="@color/logoWhite"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/widget_background"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="@dimen/widget_margin">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/fajr_label"
+                    style="@style/WidgetText"/>
+
+            <TextView
+                    android:id="@+id/dhuhr_label"
+                    style="@style/WidgetText"/>
+
+            <TextView
+                    android:id="@+id/asr_label"
+                    style="@style/WidgetText"/>
+
+            <TextView
+                    android:id="@+id/maghrib_label"
+                    style="@style/WidgetText"/>
+
+            <TextView
+                    android:id="@+id/isha_label"
+                    style="@style/WidgetText"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/fajr_athan"
+                    style="@style/WidgetText"/>
+
+            <TextView
+                    android:id="@+id/dhuhr_athan"
+                    style="@style/WidgetText"/>
+
+            <TextView
+                    android:id="@+id/asr_athan"
+                    style="@style/WidgetText"/>
+
+            <TextView
+                    android:id="@+id/maghrib_athan"
+                    style="@style/WidgetText"/>
+
+            <TextView
+                    android:id="@+id/isha_athan"
+                    style="@style/WidgetText"/>
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/fajr_iqama"
+                    style="@style/WidgetText"/>
+
+            <TextView
+                    android:id="@+id/dhuhr_iqama"
+                    style="@style/WidgetText"/>
+
+            <TextView
+                    android:id="@+id/asr_iqama"
+                    style="@style/WidgetText"/>
+
+            <TextView
+                    android:id="@+id/maghrib_iqama"
+                    style="@style/WidgetText"/>
+
+            <TextView
+                    android:id="@+id/isha_iqama"
+                    style="@style/WidgetText"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

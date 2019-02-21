@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.isnrv">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.isnrv">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -8,18 +9,20 @@
     <application
             android:allowBackup="true"
             android:fullBackupContent="@xml/backup_descriptor"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@drawable/isnrv_logo"
+            android:supportsRtl="false"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
+        <service android:name=".notification.NotificationService"/>
 
-        <service android:name="com.isnrv.helper.NotificationService"/>
-        <receiver android:name="com.isnrv.helper.StartOnBoot">
+        <receiver android:name=".notification.StartOnBoot">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+
         <activity
-                android:name="com.isnrv.Splash"
+                android:name=".Splash"
                 android:label="@string/app_name"
                 android:screenOrientation="portrait"
                 android:theme="@style/Theme.NoTitleBar.FullScreen">
@@ -33,9 +36,21 @@
             </intent-filter>
         </activity>
         <activity
-                android:name="com.isnrv.Main"
-                android:screenOrientation="portrait"
-                android:configChanges="orientation|keyboardHidden|screenSize">
+                android:name=".Main"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:label="@string/prayerTimes"
+                android:screenOrientation="portrait">
         </activity>
+
+        <receiver android:name="values.Widget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+
+            <meta-data
+                    android:name="android.appwidget.provider"
+                    android:resource="@xml/widget"/>
+        </receiver>
     </application>
+
 </manifest>

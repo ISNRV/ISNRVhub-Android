@@ -8,7 +8,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
-import com.isnrv.helper.NotificationService;
+import com.isnrv.notification.NotificationService;
 
 /**
  * This class shows a loading animation at the start of the application
@@ -16,7 +16,7 @@ import com.isnrv.helper.NotificationService;
  * @author Yasir
  */
 public class Splash extends AppCompatActivity {
-	private static final int SPLASH_TIME = 2000;
+	private static final int SPLASH_TIME = 1500;
 	private boolean active = true;
 	private boolean isRunning = true;
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name = "black">#000000</color>
-    <color name = "white">#FFFFFF</color>
-    <color name = "prayerCellTitle">#3ed557</color>
-    <color name = "prayerCellTitleLight">#7ce892</color>
-    <color name = "prayerCell">#efe8df</color>
-    <color name = "background">#f4f0ea</color>
-    <drawable name="transparent">#00000000</drawable>
+    <color name="primary">#009688</color>
+    <color name="primaryDark">#004D40</color>
+
+    <color name="widget_background">#37474f</color>
+    <color name="widget_title">#263238</color>
+
+    <color name="logoWhite">#F9F9F9</color>
 </resources>

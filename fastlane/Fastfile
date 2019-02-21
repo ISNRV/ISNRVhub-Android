@@ -27,6 +27,15 @@ platform :android do
     capture_android_screenshots
   end
 
+  desc "Create icons"
+  lane :create_icons do
+    android_appicon(
+          appicon_image_file: 'isnrv_logo.png',
+          appicon_icon_types: [:launcher, :notification],
+          appicon_path: 'app/src/main/res/drawable'
+        )
+  end
+
   desc "Submit a new Beta Build to Crashlytics Beta"
   lane :beta do
     gradle(task: "clean assembleRelease")
@@ -38,7 +47,7 @@ platform :android do
 
   desc "Deploy a new version to the Google Play"
   lane :deploy do
-    gradle(task: "clean assembleRelease")
+    gradle(task: "clean bundleRelease")
     upload_to_play_store
   end
 end

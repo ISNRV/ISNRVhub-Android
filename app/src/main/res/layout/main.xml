@@ -4,9 +4,22 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               android:windowSoftInputMode="stateHidden">
-    <LinearLayout
-            android:id="@+id/prayers"
+    <!--<LinearLayout-->
+    <!--android:id="@+id/prayers"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical"/>-->
+
+    <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"/>
+            android:layout_height="0dp"
+            android:layout_weight="6">
+
+        <androidx.viewpager.widget.PagerTabStrip
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:textAlignment="center"/>
+    </androidx.viewpager.widget.ViewPager>
+
 </LinearLayout>

@@ -33,5 +33,6 @@ public class FastlaneScreenshots {
 	public void testTakeScreenshot() {
 		onView(withId(R.id.prayer_layout)).check(matches(isDisplayed()));
 		Screengrab.screenshot("PrayerTimes");
+		Screengrab.screenshot("PrayerTimes");
 	}
 }
