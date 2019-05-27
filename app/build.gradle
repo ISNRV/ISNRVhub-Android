@@ -10,8 +10,8 @@ android {
         applicationId "com.isnrv"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 4
-        versionName "2.0"
+        versionCode 6
+        versionName "2.1.1"
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
@@ -35,8 +35,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'com.google.firebase:firebase-core:16.0.7'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
 
     implementation 'org.jsoup:jsoup:1.11.3'
     implementation 'joda-time:joda-time:2.9.9'

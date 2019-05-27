@@ -1,7 +1,9 @@
 package com.isnrv.core;
 
 import android.content.Context;
+
 import com.isnrv.R;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 
@@ -9,6 +11,7 @@ import org.joda.time.DateTimeConstants;
  * Prayer info
  */
 public class Prayer {
+	public static final int FAJR = 0;
 	public static final int DHUHR = 1;
 	public static final int MAGHRIB = 3;
 	public static final int ISHA = 4;

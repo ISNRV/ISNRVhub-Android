@@ -1,7 +1,9 @@
 package com.isnrv.core;
 
 import android.util.Log;
+
 import com.isnrv.utilities.DateTimeUtilities;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalTime;
@@ -71,7 +73,12 @@ public class IqamaTimes {
 	}
 
 	private static void handleSpecialCases(LocalTime[] iqamaTimes, int dayOfWeek, int prayer) {
-		if (prayer == Prayer.ISHA) {
+		if (prayer == Prayer.FAJR) {
+			final LocalTime fajrThreshold = LocalTime.parse("5:00AM", DateTimeUtilities.TIME_FORMAT);
+			if (iqamaTimes[prayer].compareTo(fajrThreshold) < 0) {
+				iqamaTimes[prayer] = fajrThreshold;
+			}
+		} else if (prayer == Prayer.ISHA) {
 			// Isha prayer is at or after 7:30PM all year
 			final LocalTime ishaThreshold = LocalTime.parse("7:30PM", DateTimeUtilities.TIME_FORMAT);
 			if (iqamaTimes[prayer].compareTo(ishaThreshold) < 0) {
