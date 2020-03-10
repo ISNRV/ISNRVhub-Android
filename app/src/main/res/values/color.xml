@@ -3,8 +3,9 @@
     <color name="primary">#009688</color>
     <color name="primaryDark">#004D40</color>
 
-    <color name="widget_background">#37474f</color>
-    <color name="widget_title">#263238</color>
+    <color name="widgetBackground">#37474f</color>
+    <color name="widgetTitleColor">#263238</color>
+    <color name="widgetTextColor">#F9F9F9</color>
 
-    <color name="logoWhite">#F9F9F9</color>
+    <color name="logoBackground">#FFFFFF</color>
 </resources>

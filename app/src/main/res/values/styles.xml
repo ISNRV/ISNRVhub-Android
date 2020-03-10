@@ -34,6 +34,10 @@
         <item name="android:paddingTop">@dimen/widget_margin</item>
         <item name="android:paddingBottom">@dimen/widget_margin</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/logoWhite</item>
+        <item name="android:textColor">@color/widgetTextColor</item>
+    </style>
+
+    <style name="AppTheme.Launcher" parent="@style/Theme.NoTitleBar.FullScreen">
+        <item name="android:windowBackground">@drawable/launcher</item>
     </style>
 </resources>

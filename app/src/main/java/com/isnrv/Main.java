@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.DatePicker;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
@@ -24,9 +27,10 @@ public class Main extends AppCompatActivity implements DatePickerDialog.OnDateSe
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		setTheme(R.style.AppTheme);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		setTitle(R.string.prayerTimes);
 		pager = findViewById(R.id.pager);
 		pager.setAdapter(new Adapter(getSupportFragmentManager()));
 	}
@@ -58,9 +62,10 @@ public class Main extends AppCompatActivity implements DatePickerDialog.OnDateSe
 
 	private class Adapter extends FragmentPagerAdapter {
 		Adapter(FragmentManager manager) {
-			super(manager);
+			super(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 		}
 
+		@NonNull
 		@Override
 		public Fragment getItem(int position) {
 			return PrayerList.newInstance(position);

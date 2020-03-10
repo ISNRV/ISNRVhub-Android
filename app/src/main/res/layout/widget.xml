@@ -7,26 +7,24 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/widget_title"
+            android:background="@color/widgetTitleColor"
             android:padding="@dimen/widget_margin">
         <TextView
                 style="@style/WidgetText"
                 android:gravity="start"
-                android:text="@string/isnrv_prayerTimes"
-                android:textColor="@color/logoWhite"/>
+                android:text="@string/isnrv_prayerTimes"/>
 
         <TextView
                 android:id="@+id/date"
                 style="@style/WidgetText"
-                android:gravity="top|end"
-                android:textColor="@color/logoWhite"/>
+                android:gravity="top|end"/>
     </LinearLayout>
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:background="@color/widget_background"
+            android:background="@color/widgetBackground"
             android:gravity="center_vertical"
             android:orientation="vertical"
             android:padding="@dimen/widget_margin">
