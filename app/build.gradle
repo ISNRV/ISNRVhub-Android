@@ -29,6 +29,11 @@ android {
             storePassword keystoreProperties['storePassword']
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -39,5 +44,7 @@ dependencies {
 
     implementation 'org.jsoup:jsoup:1.11.3'
     implementation 'joda-time:joda-time:2.9.9'
+
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'tools.fastlane:screengrab:2.0.0'
 }

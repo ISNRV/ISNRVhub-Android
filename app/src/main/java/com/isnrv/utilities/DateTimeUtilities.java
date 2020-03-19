@@ -19,7 +19,7 @@ public class DateTimeUtilities {
 		}
 
 		if (month == DateTimeConstants.MARCH) {
-			return isStandardTime(date) ? -1 : 0;
+			return date.getDayOfMonth() > 7  && isStandardTime(date)? -1 : 0;
 		}
 
 		return isStandardTime(date) ? 0 : 1;

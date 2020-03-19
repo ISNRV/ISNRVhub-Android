@@ -1,13 +1,66 @@
 package com.isnrv.core;
 
 import com.isnrv.utilities.DateTimeUtilities;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalTime;
-import org.joda.time.format.DateTimeFormat;
 
 public class AthanTimes {
+	private AthanTimes() {
+	}
+
+	/**
+	 * Get Athan times for the given date
+	 *
+	 * @return array with 5 Athan times of the day
+	 */
+	public static LocalTime[] get(DateTime date) {
+		final LocalTime[] athanTimes = new LocalTime[5];
+		final int dayOfYear = getIndex(date);
+		final int timeShift = DateTimeUtilities.getTimeShift(date); // Handle DST
+		for (int prayerIndex = 0; prayerIndex < 5; prayerIndex++) {
+			athanTimes[prayerIndex] = LocalTime.parse(TIMES[dayOfYear][prayerIndex], DateTimeUtilities.TIME_FORMAT).plusHours(timeShift);
+		}
+		return athanTimes;
+	}
+
+	/**
+	 * Get Athan times for the current week
+	 *
+	 * @param date current date
+	 * @return Athan times for the current week (from Sunday to Saturday)
+	 */
+	static LocalTime[][] getFullWeek(DateTime date) {
+		final LocalTime[][] athanTimes = new LocalTime[5][7];
+		final DateTime start = DateTimeUtilities.getWeekStart(date);
+		for (int i = 0; i < 7; i++) {
+			final LocalTime [] times = get(start.plusDays(i));
+			// Add to columns of return matrix
+			for (int j = 0; j < 5; j++) {
+				athanTimes[j][i] = times[j];
+			}
+		}
+		return athanTimes;
+	}
+
+	/**
+	 * Map index of Athan times table to actual day of year (for non-leap years)
+	 *
+	 * @param date current date
+	 * @return correct index in Athan times array
+	 */
+	static int getIndex(DateTime date) {
+		final int year = date.getYear();
+		final int month = date.getMonthOfYear();
+		final int day = date.getDayOfYear();
+		final boolean isLeapYear = (year % 4) == 0;
+
+		return (!isLeapYear && month > DateTimeConstants.FEBRUARY) ? day : day - 1;
+	}
+
 	private static final String[][] TIMES = {
+			/* January */
 			{"6:19AM", "12:26PM", "2:57PM", "5:15PM", "6:33PM"},
 			{"6:19AM", "12:26PM", "2:58PM", "5:16PM", "6:34PM"},
 			{"6:19AM", "12:27PM", "2:59PM", "5:17PM", "6:34PM"},
@@ -39,6 +92,7 @@ public class AthanTimes {
 			{"6:13AM", "12:35PM", "3:22PM", "5:43PM", "6:58PM"},
 			{"6:12AM", "12:36PM", "3:23PM", "5:44PM", "6:59PM"},
 			{"6:12AM", "12:36PM", "3:24PM", "5:45PM", "7:00PM"},
+			/* February */
 			{"6:11AM", "12:36PM", "3:25PM", "5:47PM", "7:01PM"},
 			{"6:10AM", "12:36PM", "3:26PM", "5:48PM", "7:02PM"},
 			{"6:10AM", "12:36PM", "3:26PM", "5:48PM", "7:02PM"},
@@ -68,6 +122,7 @@ public class AthanTimes {
 			{"5:44AM", "12:35PM", "3:46PM", "6:14PM", "7:26PM"},
 			{"5:43AM", "12:35PM", "3:46PM", "6:15PM", "7:27PM"},
 			{"5:43AM", "12:35PM", "3:46PM", "6:15PM", "7:27PM"},
+			/* March */
 			{"5:41AM", "12:35PM", "3:47PM", "6:16PM", "7:28PM"},
 			{"5:40AM", "12:34PM", "3:48PM", "6:17PM", "7:29PM"},
 			{"5:39AM", "12:34PM", "3:48PM", "6:18PM", "7:30PM"},
@@ -75,12 +130,14 @@ public class AthanTimes {
 			{"5:37AM", "12:34PM", "3:49PM", "6:19PM", "7:31PM"},
 			{"5:35AM", "12:34PM", "3:50PM", "6:21PM", "7:32PM"},
 			{"5:33AM", "12:33PM", "3:50PM", "6:22PM", "7:33PM"},
-			{"5:32AM", "12:33PM", "3:51PM", "6:23PM", "7:34PM"},
-			{"5:30AM", "12:33PM", "3:52PM", "6:24PM", "7:35PM"},
+			/* March 8 - Beginning of DST start range (2nd Sunday range) */
+			{"6:32AM", "1:33PM", "4:51PM", "7:23PM", "8:34PM"},
+			{"6:30AM", "1:33PM", "4:52PM", "7:24PM", "8:35PM"},
 			{"6:29AM", "1:33PM", "4:52PM", "7:25PM", "8:36PM"},
 			{"6:27AM", "1:32PM", "4:52PM", "7:26PM", "8:37PM"},
 			{"6:26AM", "1:32PM", "4:53PM", "7:26PM", "8:38PM"},
 			{"6:24AM", "1:32PM", "4:53PM", "7:27PM", "8:39PM"},
+			/* March 14 - End of DST start range (2nd Sunday range) */
 			{"6:23AM", "1:31PM", "4:54PM", "7:28PM", "8:40PM"},
 			{"6:21AM", "1:31PM", "4:54PM", "7:29PM", "8:41PM"},
 			{"6:20AM", "1:31PM", "4:55PM", "7:30PM", "8:42PM"},
@@ -99,6 +156,7 @@ public class AthanTimes {
 			{"5:59AM", "1:27PM", "5:00PM", "7:42PM", "8:55PM"},
 			{"5:58AM", "1:27PM", "5:00PM", "7:43PM", "8:56PM"},
 			{"5:56AM", "1:26PM", "5:00PM", "7:44PM", "8:57PM"},
+			/* April */
 			{"5:54AM", "1:26PM", "5:00PM", "7:45PM", "8:58PM"},
 			{"5:53AM", "1:26PM", "5:01PM", "7:45PM", "8:59PM"},
 			{"5:51AM", "1:26PM", "5:01PM", "7:46PM", "9:00PM"},
@@ -129,6 +187,7 @@ public class AthanTimes {
 			{"5:12AM", "1:20PM", "5:06PM", "8:09PM", "9:28PM"},
 			{"5:10AM", "1:20PM", "5:06PM", "8:10PM", "9:29PM"},
 			{"5:09AM", "1:19PM", "5:06PM", "8:11PM", "9:30PM"},
+			/* May */
 			{"5:07AM", "1:19PM", "5:06PM", "8:11PM", "9:31PM"},
 			{"5:06AM", "1:19PM", "5:07PM", "8:12PM", "9:32PM"},
 			{"5:05AM", "1:19PM", "5:07PM", "8:13PM", "9:34PM"},
@@ -160,6 +219,7 @@ public class AthanTimes {
 			{"4:37AM", "1:20PM", "5:11PM", "8:35PM", "10:03PM"},
 			{"4:36AM", "1:20PM", "5:12PM", "8:36PM", "10:04PM"},
 			{"4:35AM", "1:20PM", "5:12PM", "8:36PM", "10:04PM"},
+			/* June */
 			{"4:35AM", "1:20PM", "5:12PM", "8:37PM", "10:05PM"},
 			{"4:34AM", "1:20PM", "5:12PM", "8:37PM", "10:06PM"},
 			{"4:34AM", "1:20PM", "5:13PM", "8:38PM", "10:07PM"},
@@ -190,6 +250,7 @@ public class AthanTimes {
 			{"4:34AM", "1:25PM", "5:18PM", "8:47PM", "10:17PM"},
 			{"4:34AM", "1:26PM", "5:18PM", "8:47PM", "10:17PM"},
 			{"4:35AM", "1:26PM", "5:18PM", "8:47PM", "10:17PM"},
+			/* July */
 			{"4:36AM", "1:26PM", "5:19PM", "8:47PM", "10:17PM"},
 			{"4:36AM", "1:26PM", "5:19PM", "8:46PM", "10:16PM"},
 			{"4:37AM", "1:26PM", "5:19PM", "8:46PM", "10:16PM"},
@@ -221,6 +282,7 @@ public class AthanTimes {
 			{"5:01AM", "1:29PM", "5:19PM", "8:33PM", "9:56PM"},
 			{"5:03AM", "1:29PM", "5:18PM", "8:32PM", "9:55PM"},
 			{"5:04AM", "1:29PM", "5:18PM", "8:31PM", "9:54PM"},
+			/* August */
 			{"5:05AM", "1:29PM", "5:18PM", "8:30PM", "9:52PM"},
 			{"5:06AM", "1:28PM", "5:18PM", "8:29PM", "9:51PM"},
 			{"5:07AM", "1:28PM", "5:17PM", "8:28PM", "9:50PM"},
@@ -252,6 +314,7 @@ public class AthanTimes {
 			{"5:36AM", "1:23PM", "5:04PM", "7:56PM", "9:11PM"},
 			{"5:37AM", "1:23PM", "5:03PM", "7:54PM", "9:09PM"},
 			{"5:38AM", "1:23PM", "5:02PM", "7:53PM", "9:07PM"},
+			/* September */
 			{"5:39AM", "1:22PM", "5:01PM", "7:51PM", "9:06PM"},
 			{"5:40AM", "1:22PM", "5:00PM", "7:50PM", "9:04PM"},
 			{"5:41AM", "1:22PM", "5:00PM", "7:48PM", "9:02PM"},
@@ -282,6 +345,7 @@ public class AthanTimes {
 			{"6:04AM", "1:13PM", "4:35PM", "7:10PM", "8:22PM"},
 			{"6:05AM", "1:13PM", "4:34PM", "7:09PM", "8:20PM"},
 			{"6:06AM", "1:12PM", "4:33PM", "7:07PM", "8:19PM"},
+			/* October */
 			{"6:07AM", "1:12PM", "4:32PM", "7:06PM", "8:17PM"},
 			{"6:08AM", "1:12PM", "4:31PM", "7:04PM", "8:16PM"},
 			{"6:09AM", "1:11PM", "4:30PM", "7:03PM", "8:14PM"},
@@ -313,12 +377,14 @@ public class AthanTimes {
 			{"6:31AM", "1:06PM", "4:04PM", "6:28PM", "7:40PM"},
 			{"6:32AM", "1:06PM", "4:03PM", "6:27PM", "7:39PM"},
 			{"6:33AM", "1:06PM", "4:02PM", "6:26PM", "7:38PM"},
-			{"6:34AM", "1:06PM", "4:01PM", "6:25PM", "7:37PM"},
-			{"6:35AM", "1:06PM", "4:00PM", "6:24PM", "7:37PM"},
+			/* November 1 - Beginning of DST end range (1st Sunday range) */
+			{"5:34AM", "12:06PM", "3:01PM", "5:25PM", "6:37PM"},
+			{"5:35AM", "12:06PM", "3:00PM", "5:24PM", "6:37PM"},
 			{"5:36AM", "12:06PM", "3:00PM", "5:23PM", "6:36PM"},
 			{"5:37AM", "12:06PM", "2:59PM", "5:22PM", "6:35PM"},
 			{"5:38AM", "12:06PM", "2:58PM", "5:21PM", "6:34PM"},
 			{"5:39AM", "12:06PM", "2:57PM", "5:20PM", "6:33PM"},
+			/* November 7 - End of DST end range (1st Sunday range) */
 			{"5:40AM", "12:06PM", "2:57PM", "5:19PM", "6:32PM"},
 			{"5:41AM", "12:06PM", "2:56PM", "5:18PM", "6:31PM"},
 			{"5:41AM", "12:06PM", "2:56PM", "5:18PM", "6:31PM"},
@@ -343,6 +409,7 @@ public class AthanTimes {
 			{"5:58AM", "12:10PM", "2:47PM", "5:06PM", "6:22PM"},
 			{"5:59AM", "12:10PM", "2:46PM", "5:05PM", "6:22PM"},
 			{"6:00AM", "12:11PM", "2:46PM", "5:05PM", "6:22PM"},
+			/* December */
 			{"6:00AM", "12:11PM", "2:46PM", "5:05PM", "6:22PM"},
 			{"6:01AM", "12:11PM", "2:46PM", "5:05PM", "6:21PM"},
 			{"6:03AM", "12:12PM", "2:46PM", "5:05PM", "6:21PM"},
@@ -374,60 +441,4 @@ public class AthanTimes {
 			{"6:18AM", "12:24PM", "2:55PM", "5:13PM", "6:31PM"},
 			{"6:18AM", "12:25PM", "2:56PM", "5:14PM", "6:31PM"},
 			{"6:18AM", "12:25PM", "2:56PM", "5:14PM", "6:31PM"}};
-
-	private AthanTimes() {
-	}
-
-	/**
-	 * Get Athan times for the given date
-	 *
-	 * @return array with 5 Athan times of the day
-	 */
-	public static LocalTime[] get(DateTime date) {
-		int dayOfYear = AthanTimes.getIndex(date);
-		final LocalTime[] athanTimes = new LocalTime[5];
-		for (int i = 0; i < 5; i++) {
-			athanTimes[i] = LocalTime.parse(AthanTimes.get(dayOfYear, i), DateTimeUtilities.TIME_FORMAT);
-			athanTimes[i].plusHours(DateTimeUtilities.getTimeShift(date)); // Handle DST
-
-		}
-		return athanTimes;
-	}
-
-	/**
-	 * Get Athan times for the current week
-	 *
-	 * @param date current date
-	 * @return Athan times for the current week (from Sunday to Saturday)
-	 */
-	public static LocalTime[][] getFullWeek(DateTime date) {
-		DateTime start = DateTimeUtilities.getWeekStart(date);
-		LocalTime[][] athanTimes = new LocalTime[5][7];
-		for (int i = 0; i < 7; i++) {
-			int index = getIndex(start.plusDays(i));
-			for (int j = 0; j < 5; j++) {
-				athanTimes[j][i] = LocalTime.parse(AthanTimes.get(index, j), DateTimeFormat.forPattern("h:mma"));
-			}
-		}
-		return athanTimes;
-	}
-
-	/**
-	 * Map index of Athan times table to actual day of year (for non-leap years)
-	 *
-	 * @param date current date
-	 * @return correct index in Athan times array
-	 */
-	private static int getIndex(DateTime date) {
-		final int year = date.getYear();
-		final int month = date.getMonthOfYear();
-		final int day = date.getDayOfYear();
-		final boolean isLeapYear = (year % 4) == 0;
-
-		return (!isLeapYear && month > DateTimeConstants.FEBRUARY) ? day : day - 1;
-	}
-
-	private static String get(int dayOfYear, int prayerIndex) {
-		return TIMES[dayOfYear][prayerIndex];
-	}
 }
