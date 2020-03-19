@@ -1,16 +1,22 @@
 package com.isnrv.notification;
 
 
-import android.app.*;
+import android.app.AlarmManager;
+import android.app.IntentService;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+
 import com.isnrv.Main;
 import com.isnrv.R;
 import com.isnrv.core.IqamaTimes;
 import com.isnrv.core.Prayer;
+
 import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
 
@@ -67,11 +73,14 @@ public class NotificationService extends IntentService {
 		final Notification notification = new Notification.Builder(this)
 				.setContentTitle(title)
 				.setContentText(text)
-				.setSmallIcon(R.drawable.isnrv_logo)
+				.setSmallIcon(R.drawable.logo)
 				.setAutoCancel(true)
 				.setContentIntent(pendingIntent).build();
 
-		((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).notify(R.string.notification_number, notification);
+		final NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		if(manager != null) {
+			manager.notify(R.string.notification_number, notification);
+		}
 	}
 
 	/**
@@ -85,6 +94,8 @@ public class NotificationService extends IntentService {
 
 		final PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, 0);
 		final AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-		manager.set(AlarmManager.RTC_WAKEUP, notificationTime.getMillis(), pendingIntent);
+		if (manager != null) {
+			manager.set(AlarmManager.RTC_WAKEUP, notificationTime.getMillis(), pendingIntent);
+		}
 	}
 }

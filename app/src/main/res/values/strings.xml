@@ -13,7 +13,6 @@
     <string name="prayer_noti_title">Time for $name prayer</string>
     <string name="prayer_noti_text">Iqama at $time</string>
     <!--  Accessibility -->
-    <string name="logo_content_description">ISNRV hub</string>
     <string name="prayerTimes">Prayer Times</string>
     <string name="isnrv_prayerTimes">ISNRV Prayer Times</string>
     <string name="Friday">Jumaa</string>

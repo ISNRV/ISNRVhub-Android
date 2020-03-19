@@ -62,7 +62,7 @@ public class IqamaTimes {
 			iqamaTime = get(tomorrow)[0];
 			return new Prayer(0, tomorrow.withTime(athanTime), tomorrow.withTime(iqamaTime));
 		} catch (Exception e) {
-			Log.e(TAG, e.getMessage());
+			Log.e(TAG, e.toString());
 		}
 		return null;
 	}
