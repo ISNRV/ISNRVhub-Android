@@ -1,0 +1,9 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+        <SwitchPreferenceCompat
+            app:key="notifications"
+            app:icon="@drawable/ic_notifications"
+            app:title="@string/notifications"
+            app:summary="@string/notificationsSettingSummary"
+            app:persistent="true"
+            app:defaultValue="false" />
+</PreferenceScreen>

@@ -19,4 +19,8 @@
     <string name="extraFriday">Extra Jumaa prayer at $time</string>
     <string name="date_format">EEE, MMM d</string>
     <string name="calendar">Calendar</string>
+    <string name="settings">Settings</string>
+
+    <string name="notifications">Notifications</string>
+    <string name="notificationsSettingSummary">Allow prayer time notifications</string>
 </resources>

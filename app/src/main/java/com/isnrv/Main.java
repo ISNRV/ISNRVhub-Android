@@ -1,6 +1,7 @@
 package com.isnrv;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,15 +44,20 @@ public class Main extends AppCompatActivity implements DatePickerDialog.OnDateSe
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.calendar) {
-			final DateTime current = now.plusDays(pager.getCurrentItem());
-			final DatePickerDialog dialog = new DatePickerDialog(this, this, current.getYear(), current.getMonthOfYear() - 1, current.getDayOfMonth());
-			dialog.getDatePicker().setMinDate(now.getMillis());
-			dialog.getDatePicker().setMaxDate(now.plusDays(MAX_DAYS).getMillis());
-			dialog.show();
-			return true;
+		switch (item.getItemId()) {
+			case R.id.calendar:
+				final DateTime current = now.plusDays(pager.getCurrentItem());
+				final DatePickerDialog dialog = new DatePickerDialog(this, this, current.getYear(), current.getMonthOfYear() - 1, current.getDayOfMonth());
+				dialog.getDatePicker().setMinDate(now.getMillis());
+				dialog.getDatePicker().setMaxDate(now.plusDays(MAX_DAYS).getMillis());
+				dialog.show();
+				return true;
+			case R.id.settings:
+				startActivity(new Intent(this, Settings.class));
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
 	}
 
 	@Override

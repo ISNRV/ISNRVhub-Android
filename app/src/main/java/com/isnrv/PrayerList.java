@@ -56,7 +56,6 @@ public class PrayerList extends Fragment {
         final RecyclerView listView = view.findViewById(R.id.prayers);
         final FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(getContext());
         layoutManager.setFlexDirection(FlexDirection.ROW);
-//		layoutManager.setJustifyContent(JustifyContent.CENTER);
         listView.setLayoutManager(layoutManager);
         listView.setAdapter(new ListViewAdapter());
         return view;
