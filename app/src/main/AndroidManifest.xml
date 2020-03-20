@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
+        android:label="@string/app_name"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/icon"
@@ -48,6 +49,10 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget" />
         </receiver>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/logo" />
     </application>
 
 </manifest>
