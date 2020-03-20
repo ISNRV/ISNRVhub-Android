@@ -8,7 +8,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/widgetTitleColor"
-            android:padding="@dimen/widget_margin">
+            android:padding="@dimen/widgetMargin">
         <TextView
                 style="@style/WidgetText"
                 android:gravity="start"
@@ -27,7 +27,7 @@
             android:background="@color/widgetBackground"
             android:gravity="center_vertical"
             android:orientation="vertical"
-            android:padding="@dimen/widget_margin">
+            android:padding="@dimen/widgetMargin">
 
         <LinearLayout
                 android:layout_width="match_parent"

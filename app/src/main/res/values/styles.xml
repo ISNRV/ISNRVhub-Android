@@ -31,8 +31,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:paddingTop">@dimen/widget_margin</item>
-        <item name="android:paddingBottom">@dimen/widget_margin</item>
+        <item name="android:paddingTop">@dimen/widgetMargin</item>
+        <item name="android:paddingBottom">@dimen/widgetMargin</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/widgetTextColor</item>
     </style>

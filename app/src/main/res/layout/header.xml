@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:weightSum="3">
+
+    <TextView
+        style="@style/PrayerCardLabel"
+        android:visibility="invisible" />
+
+    <TextView
+        style="@style/PrayerCardLabel"
+        android:text="@string/athan" />
+
+    <TextView
+        style="@style/PrayerCardLabel"
+        android:text="@string/iqama" />
+</LinearLayout>
