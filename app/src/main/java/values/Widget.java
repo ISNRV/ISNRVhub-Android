@@ -6,10 +6,12 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
+
 import com.isnrv.Main;
 import com.isnrv.R;
 import com.isnrv.core.AthanTimes;
 import com.isnrv.core.IqamaTimes;
+
 import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
 
@@ -31,7 +33,7 @@ public class Widget extends AppWidgetProvider {
 		final LocalTime[] iqamaTimes = IqamaTimes.get(today);
 
 		views.setOnClickPendingIntent(R.id.widget, pendingIntent);
-		views.setTextViewText(R.id.date, DateTime.now().toString(context.getString(R.string.date_format)));
+		views.setTextViewText(R.id.date, DateTime.now().toString(context.getString(R.string.dateFormat)));
 
 		for (int i = 0; i < 5; i++) {
 			final String[] prayerNames = context.getResources().getStringArray(R.array.prayers);

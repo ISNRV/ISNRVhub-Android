@@ -84,7 +84,7 @@ public class Main extends AppCompatActivity implements DatePickerDialog.OnDateSe
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			return DateTime.now().plusDays(position).toString(getString(R.string.date_format));
+			return DateTime.now().plusDays(position).toString(getString(R.string.dateFormat));
 		}
 	}
 }
