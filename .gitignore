@@ -59,6 +59,6 @@ freeline_project_description.json
 # fastlane
 fastlane/report.xml
 fastlane/Preview.html
-fastlane/metadata
 fastlane/test_output
 fastlane/readme.md
+fastlane/metadata/android/screenshots.html

@@ -1,0 +1,4 @@
++ Modern interface and notifications
++ Home screen widget showing Athan and Iqama times of the day
++ Scroll or jump to future dates
++ Time for extra Friday prayer is now shown in the app
